@@ -45,10 +45,10 @@ NEXT_PUBLIC_API_URL=http://192,168.x.x:5000
 ```
 $ npm run dev
 
-> gijirov-js@0.1.0 dev
+> gijirov-fe@0.1.0 dev
 > next dev
 
-- info Loaded env from /hoge/gijirov-js/.env.local
+- info Loaded env from gijirov-fe/.env.local
 - ready started server on [::]:3000, url: http://localhost:3000
 ```
 
