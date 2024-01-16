@@ -2,6 +2,27 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes blink {
+  0% {
+      opacity: 1;
+  }
+  50% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
+}
+
+.typing::after {
+  content: "▌";
+}
+
+.blinking::after{
+  animation: blink 1s linear infinite;
+}
+
+/*
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -25,3 +46,4 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+*/

@@ -1,38 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 議員発言・行政答弁シミュレーター（フロントエンド）
 
-## Getting Started
+## これは何
 
-First, run the development server:
+議員発言・行政答弁シミュレーターのフロントエンドアプリケーション。
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+動作には、議員発言・行政答弁シミュレーター（バックエンド）の動作するサーバーが別に必要である。
+
+## インストール
+
+### Node.js のインストール
+
+実行環境に Node.js がインストールされていることを確認したのち、以下の手順を実行する。
+
+### 依存パッケージのインストール
+
+本リポジトリをカレントディレクトリに設定し、以下のコマンドで必要なパッケージをインストールする。
+
+```
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### .env.local の設定
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+リポジトリ直下に空のファイル `.env.local` を作成し、以下を記述する。
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```
+NEXT_PUBLIC_API_URL=<バックエンドサーバーのアドレス>
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+`<バックエンドサーバーのアドレス>` を、議員発言・行政答弁シミュレーター (バックエンド) が動作するサーバーアドレスに書き換える。
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+例えば、議員発言・行政答弁シミュレーター (バックエンド) がアドレス `192.168.x.x:5000` 上で動作している場合は、以下のように書き換える。
 
-## Learn More
+```
+NEXT_PUBLIC_API_URL=http://192,168.x.x:5000
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 実行
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### サーバーの実行
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+本リポジトリをカレントディレクトリに設定し、コマンド `npm run dev` を実行する（または `npm run build` を実行後、`npm run start` を実行する）。
 
-## Deploy on Vercel
+```
+$ npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> gijirov-js@0.1.0 dev
+> next dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- info Loaded env from /hoge/gijirov-js/.env.local
+- ready started server on [::]:3000, url: http://localhost:3000
+```
+
+これを実行すると、`started server on` に続けて表示されているアドレスにサーバーが開始される。デフォルトではローカルホスト 3000 番ポート (`127.0.0.1:3000` または `localhost:3000`) にサーバーが開始される。
+
+ホストマシン (`npm run dev` コマンドを実行したマシン) だけではなく、ネットワーク上のすべての端末からアクセス可能であり、`192.168.x.x:3000` (`<ホストマシンのIPアドレス>:3000`) からアクセスできる。
+
+ウェブブラウザでこれらのアドレスにアクセスすると、シミュレーターシステムのインターフェースが表示される。このページからシステムを利用することができる。
+
+### 任意のポート番号でサーバーを開始する
+
+例えば 8000 番ポートでサーバーを開始するように設定する場合、本リポジトリ直下の `package.json` にある `"dev"` 及び `"start"` の値を、以下のように書き換える。
+
+``` json
+{
+  ...
+  "scripts": {
+    ...
+    "dev": "next dev -p 8000",
+    ...
+    "start": "next start -p 8000",
+    ...
+  },
+  ...
+}
+```
